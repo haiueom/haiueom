@@ -45,9 +45,9 @@ export default async function Page({
 							key={d.title}
 							title={d.title}
 							description={d.summary}
-							imgSrc={urlForImage(d.mainImage)}
+							imgSrc={urlForImage(d.image)}
 							href={d.slug.current}
-							tags={d.tags}
+							categories={d.categories}
 							date={d.publishedAt}
 						/>
 					))}

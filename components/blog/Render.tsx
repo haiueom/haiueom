@@ -38,16 +38,15 @@ const serializers = {
 		},
 		image: ({ value } : any) => {
 			return (
-				// <figure className="relative aspect-video w-full rounded-md">
-				// 	<Image
-				// 		src={urlForImage(value)}
-				// 		alt={value.alt}
-				// 		layout="fill"
-				// 		className={`rounded-md object-contain object-center`}
-				// 	/>
-				// 	<figcaption>{value.desc}</figcaption>
-				// </figure>
-				<pre>Link Image: {urlForImage(value)}</pre>
+				<figure className="relative aspect-video w-full rounded-md">
+					<Image
+						src={urlForImage(value)}
+						alt={value.alt}
+						layout="fill"
+						className={`rounded-md object-contain object-center`}
+					/>
+					<figcaption>{value.desc}</figcaption>
+				</figure>
 			);
 		},
 	},
@@ -55,7 +54,7 @@ const serializers = {
 		pre: ({ children } : any) => <pre>{children}</pre>,
 	},
 };
-export const RenderPost = ({ data } : any) => {
+export const BlogRender = ({ data } : any) => {
 	return (
 		<div className="prose lg:prose-xl py-10">
 			<PortableText value={data.body} components={serializers} />

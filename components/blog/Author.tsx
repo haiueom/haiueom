@@ -2,19 +2,19 @@ import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Author(data: any) {
-	data = data.data;
+export default function Author({ data }: { data: any }) {
 	return (
 		<div>
 			<span className="sr-only">Authors</span>
 			<div className="flex flex-wrap items-center justify-center space-x-3">
-				<Image
-					src={urlForImage(data.image)}
-					width={38}
-					height={38}
-					alt={`${data.name} avatar`}
-					className="h-10 w-10 rounded-full"
-				/>
+				<div className="relative w-10 h-10 rounded-full overflow-hidden">
+					<Image
+						src={urlForImage(data.image)}
+						alt={data.image.alt}
+						fill
+						className="object-cover object-center"
+					/>
+				</div>
 				<div className="text-start whitespace-nowrap text-sm font-medium leading-5">
 					<span className="sr-only">Name</span>
 					<p className="text-foreground font-bold">{data.name}</p>

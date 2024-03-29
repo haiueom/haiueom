@@ -26,8 +26,8 @@ export default defineType({
 			to: { type: "author" },
 		}),
 		defineField({
-			name: "mainImage",
-			title: "Main image",
+			name: "image",
+			title: "Image",
 			type: "image",
 			options: {
 				hotspot: true,
@@ -67,7 +67,7 @@ export default defineType({
 		select: {
 			title: "title",
 			author: "author.name",
-			media: "mainImage",
+			media: "image",
 		},
 		prepare(selection) {
 			const { author } = selection;

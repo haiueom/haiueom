@@ -11,7 +11,7 @@ export async function getuser({ slug }: { slug: string }) {
 		}
 	);
 
-	revalidatePath('/author/[slug]', 'page')
+	revalidatePath("/author/[slug]", "page");
 
 	return data;
 }
@@ -26,7 +26,7 @@ export async function getPosts({
 	limit?: number;
 }) {
 	const data = await client.fetch(
-		`*[_type == "post" && title match $search] | order(publishedAt desc) [$offset...$limit] {"tags" : categories[]->title, author->{name,image,links,}, ...}`,
+		`*[_type == "post" && title match $search] | order(publishedAt desc) [$offset...$limit] {"categories" : categories[]->{name,slug}, author->{name,image,links,}, ...}`,
 		{
 			search: `*${search}*`,
 			offset,
@@ -43,7 +43,7 @@ export async function getPosts({
 
 	const total = Math.ceil(count / limit);
 
-	revalidatePath('/blog')
+	revalidatePath("/blog");
 
 	return {
 		data,
@@ -79,7 +79,7 @@ export async function getProjects({
 
 	const total = Math.ceil(count / limit);
 
-	revalidatePath('/projects')
+	revalidatePath("/projects");
 
 	return {
 		data,
@@ -90,13 +90,42 @@ export async function getProjects({
 
 export async function getPostBySlug({ slug }: { slug: string }) {
 	const data = await client.fetch(
-		`*[_type == "post" && slug.current == $slug] | order(publishedAt desc) [0] {"tags" : categories[]->title, author->{name,image,links,}, ...}`,
+		`*[_type == "post" && slug.current == $slug] | order(publishedAt desc) [0] {"categories" : categories[]->{name,slug}, author->{name,image,links,}, ...}`,
 		{
 			slug,
 		}
 	);
 
-	revalidatePath('/blog/[slug]', 'page')
+	revalidatePath("/blog/[slug]", "page");
 
 	return data;
 }
+
+export async function getCategoryCount({ slug }: { slug: string }) {
+	const data = await client.fetch(
+		`count(*[_type == "post" && references(*[_type == "category" && slug.current == $slug]._id)])`,
+		{
+			slug,
+		}
+	);
+
+	return data;
+}
+
+export async function getCategories() {
+	const data = await client.fetch(`*[_type == "category"]`);
+
+	let dataFinal = [];
+
+	for (let i = 0; i < data.length; i++) {
+		const count = await getCategoryCount({ slug: data[i].slug.current });
+
+		dataFinal.push({
+			...data[i],
+			count,
+		});
+	}
+
+	return dataFinal;
+}
+

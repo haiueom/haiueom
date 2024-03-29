@@ -1,14 +1,13 @@
 import Image from "next/image";
 import Link from "@/components/Link";
-import Tag from "@/components/Tag";
-import BlogCategory from "./Category";
+import BlogCategory from "@/components/blog/Category";
 
 type CardProps = {
 	title: string;
 	description: string;
 	imgSrc: string;
 	href: string;
-	tags?: string[];
+	categories?: string[];
 	date: string;
 };
 
@@ -17,7 +16,7 @@ const CardList = ({
 	description,
 	imgSrc,
 	href,
-	tags = [],
+	categories = [],
 	date,
 }: CardProps) => (
 	<div className="w-full py-4">
@@ -44,7 +43,7 @@ const CardList = ({
 							{title}
 						</Link>
 					</h3>
-					{tags && <BlogCategory data={tags} />}
+					{categories && <BlogCategory data={categories} />}
 				</div>
 				<div className="leading-7">
 					{description}

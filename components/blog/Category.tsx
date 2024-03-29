@@ -1,6 +1,5 @@
 import { badgeVariants } from "@/components/ui/badge";
 import Link from "next/link";
-import { slug } from "github-slugger";
 
 export default function BlogCategory({
 	data,
@@ -9,17 +8,16 @@ export default function BlogCategory({
 	data: any;
 	className?: string;
 }) {
-	const tags = data;
 	return (
 		<div>
 			<div className={`flex flex-wrap space-x-4 ${className}`}>
-				{tags.map((tag: any, index: number) => (
+				{data.map((item: any, index: number) => (
 					<Link
 						key={index}
 						className={badgeVariants({ variant: "outline" })}
-						href={`/category/${slug(tag)}`}
+						href={`/category/${item.slug.current}`}
 					>
-						{tag}
+						{item.name}
 					</Link>
 				))}
 			</div>

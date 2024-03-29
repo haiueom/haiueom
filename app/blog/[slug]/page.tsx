@@ -1,6 +1,6 @@
 import { ogImage } from "@/sanity/lib/image";
 import { getPostBySlug } from "@/app/actions";
-import { RenderPost } from "@/components/RenderPost";
+import { BlogRender } from "@/components/blog/Render";
 import { notFound } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
 import BlogImage from "@/components/blog/Image";
@@ -37,10 +37,10 @@ export async function generateMetadata(
 		openGraph: {
 			images: [
 				{
-					url: ogImage(post.mainImage),
+					url: ogImage(post.image),
 					width: 1200,
 					height: 630,
-					alt: post.mainImage.alt,
+					alt: post.image.alt,
 				},
 				...previousImages,
 			],
@@ -50,9 +50,7 @@ export async function generateMetadata(
 
 export default async function Page({
 	params: { slug },
-}: {
-	params: { slug: string };
-}) {
+}: Props) {
 	const data = await getPostBySlug({ slug });
 
 	// if data null return 404
@@ -63,13 +61,13 @@ export default async function Page({
 	return (
 		<article>
 			<div className="space-y-4 border-b border-muted-foreground py-10 text-center dark:border-muted">
-				<BlogImage data={data.mainImage} />
-				{data.tags && <BlogCategory data={data.tags} className="justify-center" />}
+				<BlogImage data={data.image} />
+				{data.categories && <BlogCategory data={data.categories} className="justify-center" />}
 				<BlogTitle data={data.title} />
 				<BlogDate data={data.publishedAt} />
 				<Author data={data.author} />
 			</div>
-			<RenderPost data={data} />
+			<BlogRender data={data} />
 		</article>
 	);
 }
