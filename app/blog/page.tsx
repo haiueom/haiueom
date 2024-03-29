@@ -1,4 +1,4 @@
-import CardList from "@/components/CardList";
+import CardList from "@/components/blog/CardList";
 import { getPosts } from "../actions";
 import SearchBar from "@/components/Search";
 import PageNav from "@/components/Pagination";
@@ -6,7 +6,7 @@ import { urlForImage } from "@/sanity/lib/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Blog",
+	title: "Blogs | Haiueom",
 	description: "Welcome to my blog. Here you can find all my latest posts.",
 };
 
@@ -52,11 +52,6 @@ export default async function Page({
 						/>
 					))}
 					<PageNav total={total} />
-					{/* {data.length > 0 && (
-						<div>
-							<pre>{JSON.stringify(data, null, 2)}</pre>
-						</div>
-					)} */}
 				</div>
 			</div>
 		</>

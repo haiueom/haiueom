@@ -26,6 +26,26 @@ export default defineType({
 			validation: (rule) => rule.email(),
 		}),
 		defineField({
+			name: "image",
+			title: "Image",
+			type: "image",
+			options: {
+				hotspot: true,
+			},
+			fields: [
+				{
+					name: "alt",
+					type: "string",
+					title: "Alternative Text",
+				},
+			],
+		}),
+		defineField({
+			name: "bio",
+			title: "Bio",
+			type: "text",
+		}),
+		defineField({
 			name: "links",
 			title: "Links",
 			type: "object",
@@ -79,34 +99,6 @@ export default defineType({
 					name: "other",
 					title: "Other",
 					type: "url",
-				},
-			],
-		}),
-		defineField({
-			name: "image",
-			title: "Image",
-			type: "image",
-			options: {
-				hotspot: true,
-			},
-			fields: [
-				{
-					name: "alt",
-					type: "string",
-					title: "Alternative Text",
-				},
-			],
-		}),
-		defineField({
-			name: "bio",
-			title: "Bio",
-			type: "array",
-			of: [
-				{
-					title: "Block",
-					type: "block",
-					styles: [{ title: "Normal", value: "normal" }],
-					lists: [],
 				},
 			],
 		}),

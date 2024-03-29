@@ -3,6 +3,19 @@
 import { client } from "@/sanity/lib/client";
 import { revalidatePath } from "next/cache";
 
+export async function getuser({ slug }: { slug: string }) {
+	const data = await client.fetch(
+		`*[_type == "author" && slug.current == $slug] [0]`,
+		{
+			slug,
+		}
+	);
+
+	revalidatePath('/author/[slug]', 'page')
+
+	return data;
+}
+
 export async function getPosts({
 	search,
 	offset = 0,
