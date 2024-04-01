@@ -54,7 +54,7 @@ const Header = () => {
 					</Link>
 				</div>
 				<div className="flex items-center md:space-x-3">
-					<ul className="hidden space-x-2 md:flex">
+					<ul className="hidden space-x-2 sm:flex">
 						{headerNavLinks.map((link, i) => (
 							<li key={i}>
 								<Button asChild

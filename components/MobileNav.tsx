@@ -19,23 +19,25 @@ const headerNavLinks = [
 ]
 
 const MobileNav = () => {
+	const [isOpen, setIsOpen] = useState(false)
     return (
-        <DropdownMenu>
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
                 <Button
-                    className="flex size-9 items-center justify-center p-2 md:hidden"
+                    className="flex size-9 items-center justify-center p-2 sm:hidden"
                     type="button"
                     aria-label="Toggle menu"
                     variant="ghost"
+					onClick={() => setIsOpen(!isOpen)}
                 >
                     <span className="sr-only">Toggle menu</span>
-                    <Menu />
+                    {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="min-w-[10rem]">
                 {headerNavLinks.map((link) => (
                     <DropdownMenuItem key={link.title} asChild>
-                        <Link href={link.href} className="flex items-center gap-4">
+                        <Link href={link.href} className="flex items-center gap-4" onClick={() => setIsOpen(false)}>
                             {/* {link.icon} */}
                             <div>{link.title}</div>
                         </Link>
