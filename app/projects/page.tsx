@@ -1,4 +1,4 @@
-import Card from "@/components/Card";
+import CardList from "@/components/project/CardList";
 import { getProjects } from "@/app/actions";
 import PageNav from "@/components/Pagination";
 import SearchBar from "@/components/Search";
@@ -41,7 +41,7 @@ export default async function Page({
 				<div className="space-y-2 py-8 md:space-y-5">
 					<div className="-m-4 flex flex-wrap">
 						{data.map((d: any) => (
-							<Card
+							<CardList
 								key={d.title}
 								title={d.title}
 								description={d.description}

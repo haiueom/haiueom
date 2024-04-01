@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 
 import Image from "next/image";
-import Link from "./Link";
+import Link from "../Link";
 
 type CardProps = {
 	title: string;
@@ -11,7 +11,7 @@ type CardProps = {
 	tags?: string[];
 };
 
-const Card = ({ title, description, imgSrc, href, tags = [] }: CardProps) => (
+const CardList = ({ title, description, imgSrc, href, tags = [] }: CardProps) => (
 	<div className="w-full p-4 md:w-1/2">
 		<div
 			className={`${
@@ -41,7 +41,7 @@ const Card = ({ title, description, imgSrc, href, tags = [] }: CardProps) => (
 					</div>
 				))}
 			<div className="p-6">
-				<h2 className="mb-2 text-2xl font-bold leading-8 tracking-tight">
+				<h2 className="mb-2 text-2xl font-bold leading-8 tracking-tight line-clamp-2">
 					{href ? (
 						<Link href={href} aria-label={`Link to ${title}`}>
 							{title}
@@ -61,7 +61,7 @@ const Card = ({ title, description, imgSrc, href, tags = [] }: CardProps) => (
 						</Badge>
 					))}
 				</div>
-				<p className="prose prose-sm mb-3 max-w-none text-muted-foreground">
+				<p className="prose prose-sm mb-3 max-w-none text-muted-foreground line-clamp-2">
 					{description}
 				</p>
 				{href && (
@@ -78,4 +78,4 @@ const Card = ({ title, description, imgSrc, href, tags = [] }: CardProps) => (
 	</div>
 );
 
-export default Card;
+export default CardList;
