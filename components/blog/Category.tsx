@@ -10,7 +10,7 @@ export default function BlogCategory({
 }) {
 	return (
 		<div>
-			<div className={`flex flex-wrap space-x-4 ${className}`}>
+			<div className={`flex flex-wrap gap-2 ${className}`}>
 				{data.map((item: any, index: number) => (
 					<Link
 						key={index}
