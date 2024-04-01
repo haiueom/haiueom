@@ -35,7 +35,7 @@ const CardList = ({
 			</div>
 			<div className="space-y-3 md:col-span-3">
 				<div>
-					<h3 className="text-2xl font-bold leading-8 tracking-tight mb-2">
+					<h3 className="text-2xl font-bold leading-8 tracking-tight mb-2 line-clamp-2">
 						<Link
 							href={`/blog/${href}`}
 							className="text-foreground"
@@ -45,7 +45,7 @@ const CardList = ({
 					</h3>
 					{categories && <BlogCategory data={categories} />}
 				</div>
-				<div className="leading-7">
+				<div className="leading-7 line-clamp-2">
 					{description}
 				</div>
 				<div>
