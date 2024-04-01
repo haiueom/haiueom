@@ -1,49 +1,42 @@
-'use client';
+"use client";
 
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/image";
-import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
-import dynamic from 'next/dynamic'
-const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
-
-function ytEmbed(url: string) {
-	const regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^\s&]+)/;
-	const match = url.match(regex);
-	if (match) {
-		const videoId = match[1];
-		return `https://www.youtube.com/embed/${videoId}`;
-	}
-	return null;
-}
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player/lazy"), {
+	ssr: false,
+	loading: () => <Skeleton className="absolute top-0 left-0 w-full h-full" />,
+});
 
 const serializers = {
 	types: {
-		youtube: ({ value } : any) => {
-			const embedUrl = ytEmbed(value.url);
-			if (embedUrl) {
-				return (
-					<Suspense fallback={<p>Loading youtube video . . .</p>}>
-						<ReactPlayer
-							url={embedUrl}
-							controls={true}
-							pip={true}
-							
-						/>
-					</Suspense>
-				);
-			}
-			return null;
-		},
-		image: ({ value } : any) => {
+		youtube: ({ value }: any) => {
 			return (
-				<figure className="relative aspect-video w-full rounded-md">
+				<div
+					className="relative aspect-video"
+					style={{ paddingTop: "56.25%" }}
+				>
+					<ReactPlayer
+						className="absolute top-0 left-0"
+						url={value.url}
+						width={"100%"}
+						height={"100%"}
+						controls
+					/>
+				</div>
+			);
+		},
+		image: ({ value }: any) => {
+			return (
+				<figure className="relative aspect-video w-full">
 					<Image
 						src={urlForImage(value)}
 						alt={value.alt}
-						layout="fill"
-						className={`rounded-md object-contain object-center`}
+						fill
+						className={`object-contain`}
 					/>
 					<figcaption>{value.desc}</figcaption>
 				</figure>
@@ -51,10 +44,10 @@ const serializers = {
 		},
 	},
 	block: {
-		pre: ({ children } : any) => <pre>{children}</pre>,
+		pre: ({ children }: any) => <pre>{children}</pre>,
 	},
 };
-export const BlogRender = ({ data } : any) => {
+export const BlogRender = ({ data }: any) => {
 	return (
 		<div className="prose lg:prose-xl py-10">
 			<PortableText value={data.body} components={serializers} />
