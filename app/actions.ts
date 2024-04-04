@@ -16,8 +16,6 @@ export async function getUser({ slug }: { slug: string }) {
 		}
 	);
 
-	revalidatePath("/author/[slug]", "page");
-
 	return data;
 }
 
