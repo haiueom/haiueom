@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import MainContainer from "@/components/MainContainer";
 import { cn } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const fontSans = FontSans({
 	subsets: ["latin"],
@@ -26,13 +27,18 @@ export default function RootLayout({
 			className={`${fontSans.variable} scroll-smooth`}
 			suppressHydrationWarning
 		>
-			<body className={cn(
-				"bg-background font-sans antialiased",
-				process.env.NODE_ENV === "development" ? "debug-screens" : "",
-			)}>
+			<body
+				className={cn(
+					"bg-background font-sans antialiased",
+					process.env.NODE_ENV === "development"
+						? "debug-screens"
+						: ""
+				)}
+			>
 				<MainContainer className="min-h-screen flex flex-col">
 					{children}
 				</MainContainer>
+				<SpeedInsights />
 			</body>
 		</html>
 	);
