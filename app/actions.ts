@@ -3,7 +3,12 @@
 import { client } from "@/sanity/lib/client";
 import { revalidatePath } from "next/cache";
 
-export async function getuser({ slug }: { slug: string }) {
+export async function getAcc() {
+	const data = await client.fetch(`*[_type == "hoyolab"]`);
+	return data;
+}
+
+export async function getUser({ slug }: { slug: string }) {
 	const data = await client.fetch(
 		`*[_type == "author" && slug.current == $slug] [0]`,
 		{
@@ -128,4 +133,3 @@ export async function getCategories() {
 
 	return dataFinal;
 }
-

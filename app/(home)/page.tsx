@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getuser } from "../actions";
+import { getUser } from "../actions";
 import { urlForImage } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-	const data = await getuser({ slug: "haiueom" });
+	const data = await getUser({ slug: "haiueom" });
 	return (
 		<div className="mx-auto flex max-w-3xl flex-col items-center text-center justify-center">
 			<div className="mb-8 relative w-32 h-32 rounded-full overflow-hidden">
