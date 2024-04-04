@@ -10,7 +10,7 @@ export const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL("http://localhost:3000/"),
+	metadataBase: new URL("https://haiueom.vercel.app/"),
 	title: "Ilham Taufiq",
 	description: "Web Developer - Digital Designer",
 };
