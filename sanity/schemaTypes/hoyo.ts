@@ -11,15 +11,6 @@ export default defineType({
 			type: "string",
 		}),
 		defineField({
-			name: "env",
-			title: "Env",
-			type: "slug",
-			options: {
-				source: "name",
-				maxLength: 20,
-			},
-		}),
-		defineField({
 			name: "cookie",
 			title: "Cookie",
 			type: "text",
