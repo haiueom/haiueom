@@ -1,11 +1,11 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { getUser } from "../actions";
+import { getUser } from "@/app/actions";
 import { urlForImage } from "@/sanity/lib/image";
 
 export const metadata: Metadata = {
-	title: "Ilham Taufiq",
-	description: "Web Developer - Digital Designer",
+	title: "Haiueom",
+	description: "Made with ☕ by Ilham Taufiq",
 };
 
 export default async function HomePage() {

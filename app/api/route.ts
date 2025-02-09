@@ -1,10 +1,8 @@
-import { NextResponse } from 'next/server'
-
-const data = {
-    code: 200,
-    message: 'API is online.',
-}
+import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
-    return NextResponse.json(data)
+	return NextResponse.json({
+		code: 200,
+		message: "API is online.",
+	});
 }

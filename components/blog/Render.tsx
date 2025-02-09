@@ -49,7 +49,7 @@ const serializers = {
 };
 export const BlogRender = ({ data }: any) => {
 	return (
-		<div className="prose lg:prose-xl py-10">
+		<div className="prose lg:prose-xl py-10 dark:prose-invert">
 			<PortableText value={data.body} components={serializers} />
 		</div>
 	);

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "404: Not Found",
-	description: "Page not found.",
+	title: "Page Not Found | Haiueom",
 };
 
 export default async function NotFound() {
@@ -10,7 +9,7 @@ export default async function NotFound() {
 		<main className="my-auto">
 			<div className="mx-auto flex max-w-3xl flex-col items-center text-center justify-center">
 				<h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-					404: Not Found
+					404 - Page Not Found
 				</h1>
 				<p className="mt-6 max-w-prose text-lg text-muted-foreground">
 					Could not find requested resource.

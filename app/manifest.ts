@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
 	return {
 		name: "Ilham Taufiq",
 		short_name: "Haiueom",
-		description: "Just another website.",
+		description: "Made with ☕ by Ilham Taufiq",
 		start_url: "/",
 		display: "standalone",
 		background_color: "#fff",

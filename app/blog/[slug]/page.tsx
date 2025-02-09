@@ -48,9 +48,7 @@ export async function generateMetadata(
 	};
 }
 
-export default async function Page({
-	params: { slug },
-}: Props) {
+export default async function Page({ params: { slug } }: Props) {
 	const data = await getPostBySlug({ slug });
 
 	// if data null return 404
@@ -62,7 +60,12 @@ export default async function Page({
 		<article>
 			<div className="space-y-4 border-b border-muted-foreground py-10 text-center dark:border-muted">
 				<BlogImage data={data.image} />
-				{data.categories && <BlogCategory data={data.categories} className="justify-center" />}
+				{data.categories && (
+					<BlogCategory
+						data={data.categories}
+						className="justify-center"
+					/>
+				)}
 				<BlogTitle data={data.title} />
 				<BlogDate data={data.publishedAt} />
 				<Author data={data.author} />

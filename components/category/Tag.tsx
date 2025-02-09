@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 interface Props {
 	text: string;
@@ -6,12 +7,14 @@ interface Props {
 
 const Tag = ({ text }: Props) => {
 	return (
-		<Link
-			href={`/category/${text}`}
-			className="text-sm font-medium uppercase text-primary hover:brightness-125 dark:hover:brightness-125"
-		>
-			{text.split(" ").join("-")}
-		</Link>
+		<Button variant="outline" asChild>
+			<Link
+				href={`/category/${text}`}
+				className="text-sm font-medium uppercase text-primary hover:brightness-125 dark:hover:brightness-125"
+			>
+				{text.split(" ").join("-")}
+			</Link>
+		</Button>
 	);
 };
 

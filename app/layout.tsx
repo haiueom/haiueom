@@ -4,6 +4,7 @@ import "./globals.css";
 import MainContainer from "@/components/MainContainer";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import ThemeProvider from "@/components/ThemeProvider";
 
 export const fontSans = FontSans({
 	subsets: ["latin"],
@@ -13,7 +14,7 @@ export const fontSans = FontSans({
 export const metadata: Metadata = {
 	metadataBase: new URL("https://haiueom.vercel.app/"),
 	title: "Ilham Taufiq",
-	description: "Web Developer - Digital Designer",
+	description: "Made with ☕ by Ilham Taufiq",
 };
 
 export default function RootLayout({
@@ -35,9 +36,15 @@ export default function RootLayout({
 						: ""
 				)}
 			>
-				<MainContainer className="min-h-screen flex flex-col">
-					{children}
-				</MainContainer>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+				>
+					<MainContainer className="min-h-screen flex flex-col">
+						{children}
+					</MainContainer>
+				</ThemeProvider>
 				<SpeedInsights />
 			</body>
 		</html>

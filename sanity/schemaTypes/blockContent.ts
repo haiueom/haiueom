@@ -1,5 +1,4 @@
 import { defineType, defineArrayMember } from "sanity";
-import React from "react";
 
 /**
  * This is the schema type for block content used in the post document type

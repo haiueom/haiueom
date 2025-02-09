@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "@/components/Link";
 import MobileNav from "@/components/MobileNav";
 // import SearchButton from '@/components/SearchButton'
-// import ThemeSwitch from '@/components/ThemeSwitch'
+import ThemeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 
 const headerNavLinks = [
@@ -34,48 +34,50 @@ const Header = () => {
 	}, []);
 
 	return (
-		<header
-			className={cn(
-				"fixed inset-x-0 top-4 z-40 flex h-[60px] mx-8 md:mx-auto items-center justify-between rounded-3xl bg-secondary border-border border px-4 md:px-8 shadow-sm saturate-100 backdrop-blur-[10px] transition-all duration-200 md:max-w-2xl lg:max-w-4xl",
-				isScrolled && "bg-background/80 border-transparent"
-			)}
-		>
-			<div className="w-full mx-auto flex h-[60px] items-center justify-between">
-				<div>
-					<Link href="/">
-						<div className="flex items-center justify-between">
-							<NextImage
-								src="/img/logo.png"
-								alt="Logo"
-								width="40"
-								height="40"
-							/>
-						</div>
-					</Link>
-				</div>
-				<div className="flex items-center md:space-x-3">
-					<ul className="hidden space-x-2 sm:flex">
-						{headerNavLinks.map((link, i) => (
-							<li key={i}>
-								<Button asChild
-									variant="ghost"
-								>
-									<Link
-										className={cn(
-											"px-3 py-2 text-sm font-medium transition-all duration-300",
-											!isScrolled && "hover:bg-primary/10",
+		<header className="relative">
+			<div
+				className={cn(
+					"fixed inset-x-0 top-4 z-40 flex h-[60px] mx-8 md:mx-auto items-center justify-between rounded-3xl bg-secondary border-border border px-4 md:px-8 shadow-sm saturate-100 backdrop-blur-[10px] transition-all duration-200 md:max-w-2xl lg:max-w-4xl",
+					isScrolled &&
+						"bg-background/80 dark:bg-background/20 dark:shadow-white/20 border-transparent shadow-lg"
+				)}
+			>
+				<div className="w-full mx-auto flex h-[60px] items-center justify-between">
+					<div>
+						<Link href="/">
+							<div className="flex items-center justify-between">
+								<NextImage
+									src="/img/logo.png"
+									alt="Logo"
+									width="40"
+									height="40"
+								/>
+							</div>
+						</Link>
+					</div>
+					<div className="flex items-center md:space-x-3">
+						<ul className="hidden space-x-2 sm:flex">
+							{headerNavLinks.map((link, i) => (
+								<li key={i}>
+									<Button asChild variant="ghost">
+										<Link
+											className={cn(
+												"px-3 py-2 text-sm font-medium transition-all duration-300",
+												!isScrolled &&
+													"hover:bg-primary/10"
 											)}
-										href={link.href}
-									>
-										{link.title}
-									</Link>
-								</Button>
-							</li>
-						))}
-					</ul>
-					{/* <SearchButton /> */}
-					{/* <ThemeSwitch /> */}
-					<MobileNav />
+											href={link.href}
+										>
+											{link.title}
+										</Link>
+									</Button>
+								</li>
+							))}
+						</ul>
+						{/* <SearchButton /> */}
+						<ThemeToggle />
+						<MobileNav />
+					</div>
 				</div>
 			</div>
 		</header>
