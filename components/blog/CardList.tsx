@@ -7,7 +7,7 @@ type CardProps = {
 	description: string;
 	imgSrc: string;
 	href: string;
-	categories?: string[];
+	categories?: any[];
 	date: string;
 };
 
@@ -43,7 +43,7 @@ const CardList = ({
 							{title}
 						</Link>
 					</h3>
-					{categories && <BlogCategory data={categories} />}
+					{categories.length > 0 && <BlogCategory data={categories} />}
 				</div>
 				<div className="leading-7 line-clamp-2">
 					{description}

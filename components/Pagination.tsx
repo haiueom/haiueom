@@ -37,20 +37,20 @@ const PageNav = ({ total }: { total: number }) => {
 				</PaginationItem>
 
 				{currentPage > 2 && (
-					<PaginationItem>
+					<PaginationItem key="ellipsis-start">
 						<PaginationEllipsis />
 					</PaginationItem>
 				)}
 
 				{currentPage > 1 && (
-					<PaginationItem>
+					<PaginationItem key={currentPage - 1}>
 						<PaginationLink href={createPageURL(currentPage - 1)}>
 							{currentPage - 1}
 						</PaginationLink>
 					</PaginationItem>
 				)}
 
-				<PaginationItem>
+				<PaginationItem key={currentPage}>
 					<PaginationLink
 						href={createPageURL(currentPage)}
 						isActive
@@ -60,7 +60,7 @@ const PageNav = ({ total }: { total: number }) => {
 				</PaginationItem>
 
 				{currentPage < total && (
-					<PaginationItem>
+					<PaginationItem key={currentPage + 1}>
 						<PaginationLink href={createPageURL(currentPage + 1)}>
 							{currentPage + 1}
 						</PaginationLink>
@@ -68,7 +68,7 @@ const PageNav = ({ total }: { total: number }) => {
 				)}
 
 				{currentPage < total - 1 && (
-					<PaginationItem>
+					<PaginationItem key="ellipsis-end">
 						<PaginationEllipsis />
 					</PaginationItem>
 				)}

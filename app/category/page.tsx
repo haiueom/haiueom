@@ -6,10 +6,10 @@ import { Separator } from "@/components/ui/separator";
 export default async function Page() {
 	const data = await getCategories();
 	// sort data base on data.count
-	const sortedData = data.sort((a: any, b: any) => b.count - a.count);
+	const sortedData = data.sort((a, b) => b.count - a.count);
 	return (
 		<div className="flex flex-col items-center justify-center space-y-6">
-			<div className="">
+			<div>
 				<h1 className="text-3xl font-extrabold leading-9 tracking-tight text-foreground sm:text-4xl sm:leading-10 md:px-6 md:text-6xl md:leading-14">
 					Categories
 				</h1>
@@ -19,7 +19,7 @@ export default async function Page() {
 				{data.length === 0 && "No categories found."}
 				{sortedData.map((t) => {
 					return (
-						<div key={t}>
+						<div key={t.slug.current}>
 							<Tag text={t.slug.current} />
 							<Link
 								href={`/category/${t.slug.current}`}

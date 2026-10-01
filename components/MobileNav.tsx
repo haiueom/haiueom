@@ -28,7 +28,6 @@ const MobileNav = () => {
                     type="button"
                     aria-label="Toggle menu"
                     variant="ghost"
-					onClick={() => setIsOpen(!isOpen)}
                 >
                     <span className="sr-only">Toggle menu</span>
                     {isOpen ? <X size={24} /> : <Menu size={24} />}

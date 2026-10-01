@@ -31,16 +31,16 @@ export async function getPosts({
 	const data = await client.fetch(
 		`*[_type == "post" && title match $search] | order(publishedAt desc) [$offset...$limit] {"categories" : categories[]->{name,slug}, author->{name,image,links,}, ...}`,
 		{
-			search: `*${search}*`,
+			search: `*${search ?? ""}*`,
 			offset,
-			limit,
+			limit: offset + limit,
 		}
 	);
 
 	const count = await client.fetch(
 		`count(*[_type == "post" && title match $search])`,
 		{
-			search: `*${search}*`,
+			search: `*${search ?? ""}*`,
 		}
 	);
 
@@ -67,16 +67,16 @@ export async function getProjects({
 	const data = await client.fetch(
 		`*[_type == "project" && title match $search] | order(publishedAt desc) [$offset...$limit]`,
 		{
-			search: `*${search}*`,
+			search: `*${search ?? ""}*`,
 			offset,
-			limit,
+			limit: offset + limit,
 		}
 	);
 
 	const count = await client.fetch(
 		`count(*[_type == "project" && title match $search])`,
 		{
-			search: `*${search}*`,
+			search: `*${search ?? ""}*`,
 		}
 	);
 
@@ -116,18 +116,45 @@ export async function getCategoryCount({ slug }: { slug: string }) {
 }
 
 export async function getCategories() {
-	const data = await client.fetch(`*[_type == "category"]`);
+	const data = await client.fetch<
+		{ name: string; slug: { current: string }; count: number }[]
+	>(
+		`*[_type == "category"] {name, slug, "count": count(*[_type == "post" && references(^._id)])}`
+	);
 
-	let dataFinal = [];
+	return data;
+}
 
-	for (let i = 0; i < data.length; i++) {
-		const count = await getCategoryCount({ slug: data[i].slug.current });
+export async function getPostsByCategory({
+	slug,
+	offset = 0,
+	limit = 10,
+}: {
+	slug: string;
+	offset?: number;
+	limit?: number;
+}) {
+	const data = await client.fetch(
+		`*[_type == "post" && $slug in categories[]->slug.current] | order(publishedAt desc) [$offset...$limit] {"categories" : categories[]->{name,slug}, author->{name,image,links,}, ...}`,
+		{
+			slug,
+			offset,
+			limit: offset + limit,
+		}
+	);
 
-		dataFinal.push({
-			...data[i],
-			count,
-		});
-	}
+	const count = await client.fetch(
+		`count(*[_type == "post" && $slug in categories[]->slug.current])`,
+		{
+			slug,
+		}
+	);
 
-	return dataFinal;
+	const total = Math.ceil(count / limit);
+
+	return {
+		data,
+		count,
+		total,
+	};
 }
